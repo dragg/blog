@@ -5,12 +5,19 @@
 var pagesControllers = angular.module('pagesControllers', []);
 
 pagesControllers.controller('CommonCtrl', ['$scope', '$location', function($scope, $location) {
-
-    $scope.isActive = function(path){
+    $scope.isActive = function(path) {
         return path === $location.path();
     };
 }]);
 
 pagesControllers.controller('MainCtrl', ['$scope', function($scope) {
+
+}]);
+
+pagesControllers.controller('ArticlesCtrl', ['$scope', function($scope) {
+
+}]);
+
+pagesControllers.controller('ProjectsCtrl', ['$scope', function($scope) {
 
 }]);

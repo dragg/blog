@@ -15,11 +15,11 @@ blogApp.config(['$routeProvider', function ($routeProvider) {
         }).
         when('/articles', {
             templateUrl: '/views/articles.html',
-            controller: 'MainCtrl'
+            controller: 'ArticlesCtrl'
         }).
         when('/projects', {
             templateUrl: '/views/projects.html',
-            controller: 'MainCtrl'
+            controller: 'ProjectsCtrl'
         }).
         when('/other', {
             templateUrl: '/views/other.html',
