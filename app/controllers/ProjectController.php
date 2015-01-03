@@ -9,7 +9,8 @@ class ProjectController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$projects = Project::all();
+        return Response::json($projects);
 	}
 
 
@@ -43,7 +44,8 @@ class ProjectController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+        $project = Project::where('id', $id)->with('articles')->first();
+        return Response::json($project);
 	}
 
 

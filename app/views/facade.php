@@ -5,11 +5,18 @@
 	<title>Blog</title>
 
     <link rel="stylesheet" href="./vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/custom-style.css"/>
 
     <script type="text/javascript" src="./vendor/js/angular.min.js"></script>
     <script type="text/javascript" src="./vendor/js/angular-route.min.js"></script>
+    <script type="text/javascript" src="./vendor/js/angular-resource.min.js"></script>
+
     <script type="text/javascript" src="./js/app.js"></script>
-    <script type="text/javascript" src="./js/controllers/PageControllers.js"></script>
+    <script type="text/javascript" src="./js/routes/blog.routes.js"></script>
+    <script type="text/javascript" src="./js/services/blog.services.js"></script>
+    <script type="text/javascript" src="./js/controllers/blog.controllers.js"></script>
+
+
 </head>
 <body data-ng-controller="CommonCtrl">
 
@@ -50,9 +57,9 @@
     <div class="container-fluid">
         <!-- Stack the columns on mobile by making one full-width and the other half-width -->
         <div class="row">
-            <div class="col-md-3">.col-xs-6 .col-md-4</div>
-            <div class="col-md-6" ng-view></div>
-            <div class="col-md-3">.col-xs-6 .col-md-4</div>
+            <div class="col-md-3"></div>
+            <div class="col-md-6 view" ng-view></div>
+            <div class="col-md-3"></div>
         </div>
 
     </div>

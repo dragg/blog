@@ -1,5 +1,8 @@
 <?php
 
+Blade::setContentTags('<%', '%>'); 		// for variables and all things Blade
+Blade::setEscapedContentTags('<%%', '%%>'); 	// for escaped data
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,7 +14,12 @@
 |
 */
 
+Route::get('/angular/', ['uses' => 'AngularController@serve']);
+
 Route::get('/', function()
 {
 	return View::make('facade');
 });
+
+Route::resource('article', 'ArticleController');
+Route::resource('project', 'ProjectController');

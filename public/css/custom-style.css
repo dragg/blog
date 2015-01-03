@@ -1,0 +1,7 @@
+.top {
+    margin-top: 50px;
+}
+
+.view .top:first-child {
+    margin-top: 0;
+}

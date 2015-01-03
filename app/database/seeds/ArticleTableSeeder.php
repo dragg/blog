@@ -16,6 +16,7 @@ class ArticleTableSeeder extends Seeder
             $article = new Article;
             $article->title = $faker->name;
             $article->body = $faker->text;
+            $article->project_id = $i % 3 + 1;
 
             $article->save();
         }

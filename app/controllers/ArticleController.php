@@ -13,18 +13,6 @@ class ArticleController extends \BaseController {
         return Response::json($articles);
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -44,7 +32,8 @@ class ArticleController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$article = Article::findOrFail($id);
+        return Response::json($article);
 	}
 
 
