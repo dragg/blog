@@ -1,6 +1,14 @@
 <?php
 
-class ArticleController extends \BaseController {
+class CommentController extends \BaseController
+{
+
+    protected $comments = null;
+
+    public function __construct(\CommentsService $cs)
+    {
+        $this->comments = $cs;
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -9,9 +17,20 @@ class ArticleController extends \BaseController {
 	 */
 	public function index()
 	{
-		$articles = Article::all();
-        return Response::json($articles);
+
 	}
+
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		//
+	}
+
 
 	/**
 	 * Store a newly created resource in storage.
@@ -20,7 +39,11 @@ class ArticleController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+        $article_id = Input::get('article_id');
+		$author = Input::get('author');
+        $body = Input::get('body');
+        $id = $this->comments->add($article_id, $author, $body);
+        return Response::json($id);
 	}
 
 
@@ -32,9 +55,7 @@ class ArticleController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//$article = Article::findOrFail($id);
-        $article = Article::where('id', $id)->with('comments')->first();
-        return Response::json($article);
+		//
 	}
 
 

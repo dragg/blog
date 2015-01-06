@@ -21,4 +21,4 @@ class ArticleTableSeeder extends Seeder
             $article->save();
         }
     }
-} 
+}

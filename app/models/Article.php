@@ -14,4 +14,9 @@ class Article extends Eloquent
     {
         return $this->belongsTo('Project');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('Comment');
+    }
 } 

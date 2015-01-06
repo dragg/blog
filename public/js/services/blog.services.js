@@ -33,3 +33,15 @@ articleServices.factory('ProjectDetail', ['$http', function($http) {
         return $http.get('/project/' + id);
     };
 }]);
+
+articleServices.factory('Comment', ['$http', function($http) {
+    return {
+        add: function(article_id, author, body) {
+            return $http.post('/comment', {
+                article_id: article_id,
+                author: author,
+                body: body
+            });
+        }
+    }
+}]);
