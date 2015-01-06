@@ -22,17 +22,20 @@ function CommonCtrl($location) {
 function MainCtrl() {
 }
 
-ArticleListCtrl.$inject = ['ArticleList'];
-function ArticleListCtrl(ArticleList) {
+ArticleListCtrl.$inject = ['Article'];
+function ArticleListCtrl(Article) {
     var vm = this;
-    vm.articles = ArticleList.query();
+    Article.getList().success(function(res) {
+        vm.articles = res;
+    });
+
 }
 
-ArticleDetailCtrl.$inject = ['$routeParams', 'ArticleDetail', 'Comment'];
-function ArticleDetailCtrl($routeParams, ArticleDetail, Comment) {
+ArticleDetailCtrl.$inject = ['$routeParams', 'Article', 'Comment'];
+function ArticleDetailCtrl($routeParams, Article, Comment) {
     var vm = this;
 
-    ArticleDetail($routeParams.articleId).success(function(res) {
+    Article.get($routeParams.articleId).success(function(res) {
         vm.article = res;
     });
 
@@ -51,16 +54,18 @@ function ArticleDetailCtrl($routeParams, ArticleDetail, Comment) {
     }
 }
 
-ProjectListCtrl.$inject = ['ProjectList'];
-function ProjectListCtrl(ProjectList) {
+ProjectListCtrl.$inject = ['Project'];
+function ProjectListCtrl(Project) {
     var vm = this;
-    vm.projects = ProjectList.query();
+    Project.getList().success(function(res) {
+        vm.projects = res;
+    });
 }
 
-ProjectDetailCtrl.$inject = ['$routeParams', 'ProjectDetail'];
-function ProjectDetailCtrl($routeParams, ProjectDetail) {
+ProjectDetailCtrl.$inject = ['$routeParams', 'Project'];
+function ProjectDetailCtrl($routeParams, Project) {
     var vm = this;
-    ProjectDetail($routeParams.projectId).success(function(res) {
+    Project.get($routeParams.projectId).success(function(res) {
         vm.project = res;
     });
 }
