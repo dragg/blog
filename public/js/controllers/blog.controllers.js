@@ -41,6 +41,7 @@ function ArticleDetailCtrl($routeParams, Article, Comment) {
 
     vm.clearComment = clearComment;
     vm.sendComment = sendComment;
+    vm.refreshComments = refreshComments;
 
     function clearComment() {
         vm.comment = {};
@@ -48,9 +49,16 @@ function ArticleDetailCtrl($routeParams, Article, Comment) {
 
     function sendComment(article_id, author, body) {
         Comment.add(article_id, author, body).success(function(res) {
-            console.log(res);
             vm.clearComment();
-        })
+            vm.refreshComments(article_id);
+        });
+    }
+
+    function refreshComments(article_id) {
+        Comment.get(article_id).success(function(res) {
+            console.log(res);
+            vm.article.comments = res;
+        });
     }
 }
 

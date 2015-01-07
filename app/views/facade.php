@@ -5,12 +5,16 @@
 	<title>Blog</title>
 
     <link rel="stylesheet" href="./vendor/css/bootstrap.min.css">
+
+    <!--<link rel="stylesheet" href="./build/styles/bundle.css"/>-->
     <link rel="stylesheet" href="./css/custom-style.css"/>
 
     <script type="text/javascript" src="./vendor/js/angular.min.js"></script>
     <script type="text/javascript" src="./vendor/js/angular-route.min.js"></script>
     <script type="text/javascript" src="./vendor/js/angular-resource.min.js"></script>
 
+
+    <!--<script type="text/javascript" src="./build/js/bundle.js"></script>-->
     <script type="text/javascript" src="./js/app.js"></script>
     <script type="text/javascript" src="./js/routes/blog.routes.js"></script>
     <script type="text/javascript" src="./js/services/blog.services.js"></script>

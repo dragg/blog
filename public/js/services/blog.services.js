@@ -51,7 +51,8 @@ function Project($http) {
 Comment.$inject = ['$http'];
 function Comment($http) {
     var service = {
-        add     : add
+        add     : add,
+        get     : get
     };
 
     return service;
@@ -64,5 +65,9 @@ function Comment($http) {
             author: author,
             body: body
         });
+    }
+
+    function get(article_id) {
+        return $http.get('/comment?article_id=' + article_id);
     }
 }

@@ -17,7 +17,9 @@ class CommentController extends \BaseController
 	 */
 	public function index()
 	{
-
+        $article_id = Input::get('article_id');
+        $comments = Comment::where('article_id', $article_id)->get();
+        return Response::json($comments);
 	}
 
 
