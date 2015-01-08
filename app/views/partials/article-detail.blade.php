@@ -1,6 +1,7 @@
 <div>
     <h1>{{vm.article.title}}</h1>
     <p>{{vm.article.body}}</p>
+    <p>{{vm.article.created_at}}</p>
 
     <h4>Комментарии:</h4>
 
@@ -19,8 +20,7 @@
         <li>
             <h6>{{comment.author}}</h6>
             <p>{{comment.body}}</p>
+            <p>{{comment.created_at}}</p>
         </li>
     </ul>
-
-
 </div>
