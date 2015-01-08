@@ -17,6 +17,8 @@ class CreateArticlesTable extends Migration {
             $table->string('title');
             $table->text('body');
             $table->integer('project_id')->nullable();
+            $table->integer('prev_article_id')->nullable();
+            $table->integer('next_article_id')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

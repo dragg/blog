@@ -33,7 +33,7 @@ class ArticleController extends \BaseController {
 	public function show($id)
 	{
 		//$article = Article::findOrFail($id);
-        $article = Article::where('id', $id)->with('comments')->first();
+        $article = Article::where('id', $id)->with('comments', 'prev', 'next')->first();
         return Response::json($article);
 	}
 
