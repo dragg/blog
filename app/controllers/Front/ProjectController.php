@@ -1,4 +1,8 @@
-<?php
+<?php namespace Front;
+
+use \Response;
+use \Input;
+use \Project;
 
 class ProjectController extends \BaseController {
 

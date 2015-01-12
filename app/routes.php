@@ -13,17 +13,33 @@ Blade::setEscapedContentTags('<%%', '%%>'); 	// for escaped data
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-Route::get('/angular/', ['uses' => 'AngularController@serve']);
-
-
-// Start-main page on SPA
-Route::get('/', function()
+Route::filter('authAdmin', function()
 {
-	return View::make('facade');
+    if(true) {
+        //return Redirect::to('/');
+    }
+});
+Route::group(array('namespace' => 'Front'), function()
+{
+    Route::get('/angular/', ['uses' => 'AngularController@serve']);
+    // Start-main page on SPA
+    Route::get('/', function()
+    {
+        return View::make('front.facade');
+    });
+    //RESTful Resource Controllers
+    Route::resource('article', 'ArticleController');
+    Route::resource('project', 'ProjectController');
+    Route::resource('comment', 'CommentController');
 });
 
-//RESTful Resource Controllers
-Route::resource('article', 'ArticleController');
-Route::resource('project', 'ProjectController');
-Route::resource('comment', 'CommentController');
+Route::group(array('namespace' => 'Admin',
+    'prefix' => 'admin',
+    'before' => 'authAdmin'), function()
+{
+    // Start-main page on SPA
+    Route::get('/', function()
+    {
+        return View::make('admin.signin');
+    });
+});

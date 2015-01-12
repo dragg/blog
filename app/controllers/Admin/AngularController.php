@@ -1,4 +1,4 @@
-<?php
+<?php namespace Admin;
 /**
  * Created by PhpStorm.
  * User: Nikola
@@ -6,10 +6,14 @@
  * Time: 16:47
  */
 
+use \View;
+use \Input;
+use \Controller;
+
 class AngularController extends Controller
 {
     public function serve()
     {
-        return View::make(Input::get('id'));
+        return View::make('admin.angularPartials.'.Input::get('id'));
     }
 }

@@ -1,14 +1,9 @@
-<?php
+<?php namespace Front;
 
-class CommentController extends \BaseController
-{
+use \Response;
+use \Article;
 
-    protected $comments = null;
-
-    public function __construct(\CommentsService $cs)
-    {
-        $this->comments = $cs;
-    }
+class ArticleController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -17,22 +12,9 @@ class CommentController extends \BaseController
 	 */
 	public function index()
 	{
-        $article_id = Input::get('article_id');
-        $comments = Comment::where('article_id', $article_id)->get();
-        return Response::json($comments);
+		$articles = Article::all();
+        return Response::json($articles);
 	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -41,11 +23,7 @@ class CommentController extends \BaseController
 	 */
 	public function store()
 	{
-        $article_id = Input::get('article_id');
-		$author = Input::get('author');
-        $body = Input::get('body');
-        $id = $this->comments->add($article_id, $author, $body);
-        return Response::json($id);
+		//
 	}
 
 
@@ -57,7 +35,9 @@ class CommentController extends \BaseController
 	 */
 	public function show($id)
 	{
-		//
+		//$article = Article::findOrFail($id);
+        $article = Article::where('id', $id)->with('comments', 'prev', 'next')->first();
+        return Response::json($article);
 	}
 
 
