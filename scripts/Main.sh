@@ -5,7 +5,11 @@ cat << EOF | sudo tee -a /etc/motd.tail
 
 Welcome to ubuntu/trusty32 Vagrant Box
 
+<<<<<<< HEAD
 For php-prototype
+=======
+For blog
+>>>>>>> comments
 
 ***************************************
 EOF

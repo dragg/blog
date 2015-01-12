@@ -16,10 +16,14 @@ Blade::setEscapedContentTags('<%%', '%%>'); 	// for escaped data
 
 Route::get('/angular/', ['uses' => 'AngularController@serve']);
 
+
+// Start-main page on SPA
 Route::get('/', function()
 {
 	return View::make('facade');
 });
 
+//RESTful Resource Controllers
 Route::resource('article', 'ArticleController');
 Route::resource('project', 'ProjectController');
+Route::resource('comment', 'CommentController');

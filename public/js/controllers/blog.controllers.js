@@ -22,30 +22,58 @@ function CommonCtrl($location) {
 function MainCtrl() {
 }
 
-ArticleListCtrl.$inject = ['ArticleList'];
-function ArticleListCtrl(ArticleList) {
+ArticleListCtrl.$inject = ['Article'];
+function ArticleListCtrl(Article) {
     var vm = this;
-    vm.articles = ArticleList.query();
+    Article.getList().success(function(res) {
+        vm.articles = res;
+    });
+
 }
 
-ArticleDetailCtrl.$inject = ['$routeParams', 'ArticleDetail'];
-function ArticleDetailCtrl($routeParams, ArticleDetail) {
+ArticleDetailCtrl.$inject = ['$routeParams', 'Article', 'Comment'];
+function ArticleDetailCtrl($routeParams, Article, Comment) {
     var vm = this;
-    ArticleDetail($routeParams.articleId).success(function(res) {
+
+    Article.get($routeParams.articleId).success(function(res) {
         vm.article = res;
+    });
+
+    vm.clearComment = clearComment;
+    vm.sendComment = sendComment;
+    vm.refreshComments = refreshComments;
+
+    function clearComment() {
+        vm.comment = {};
+    }
+
+    function sendComment(article_id, author, body) {
+        Comment.add(article_id, author, body).success(function(res) {
+            vm.clearComment();
+            vm.refreshComments(article_id);
+        });
+    }
+
+    function refreshComments(article_id) {
+        Comment.get(article_id).success(function(res) {
+            console.log(res);
+            vm.article.comments = res;
+        });
+    }
+}
+
+ProjectListCtrl.$inject = ['Project'];
+function ProjectListCtrl(Project) {
+    var vm = this;
+    Project.getList().success(function(res) {
+        vm.projects = res;
     });
 }
 
-ProjectListCtrl.$inject = ['ProjectList'];
-function ProjectListCtrl(ProjectList) {
+ProjectDetailCtrl.$inject = ['$routeParams', 'Project'];
+function ProjectDetailCtrl($routeParams, Project) {
     var vm = this;
-    vm.projects = ProjectList.query();
-}
-
-ProjectDetailCtrl.$inject = ['$routeParams', 'ProjectDetail'];
-function ProjectDetailCtrl($routeParams, ProjectDetail) {
-    var vm = this;
-    ProjectDetail($routeParams.projectId).success(function(res) {
+    Project.get($routeParams.projectId).success(function(res) {
         vm.project = res;
     });
 }

@@ -9,3 +9,5 @@ Thumbs.db
 /.vagrant
 /.idea
 /bower_components
+/public/build/
+/node_modules
