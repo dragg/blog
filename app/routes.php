@@ -15,10 +15,11 @@ Blade::setEscapedContentTags('<%%', '%%>'); 	// for escaped data
 */
 Route::filter('authAdmin', function()
 {
-    if(true) {
-        //return Redirect::to('/');
+    if(!Auth::admin()->check()) {
+        return View::make('admin.signin');
     }
 });
+
 Route::group(array('namespace' => 'Front'), function()
 {
     Route::get('/angular/', ['uses' => 'AngularController@serve']);
@@ -34,12 +35,15 @@ Route::group(array('namespace' => 'Front'), function()
 });
 
 Route::group(array('namespace' => 'Admin',
-    'prefix' => 'admin',
-    'before' => 'authAdmin'), function()
+    'prefix' => 'adm'), function()
 {
-    // Start-main page on SPA
-    Route::get('/', function()
-    {
-        return View::make('admin.signin');
+    Route::group(array('before' => 'authAdmin'), function(){
+        // Start-main page on SPA
+        Route::get('dashboard', function()
+        {
+            return View::make('front.facade');
+        });
     });
+
+    Route::resource('auth', 'AuthController');
 });
