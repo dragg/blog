@@ -46,7 +46,7 @@ class ProjectController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($lang, $id)
 	{
         $project = Project::where('id', $id)->with('articles')->first();
         return Response::json($project);

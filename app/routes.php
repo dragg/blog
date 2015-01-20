@@ -13,37 +13,51 @@ Blade::setEscapedContentTags('<%%', '%%>'); 	// for escaped data
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::filter('authAdmin', function()
-{
-    if(!Auth::admin()->check()) {
-        return View::make('admin.signin');
-    }
-});
 
-Route::group(array('namespace' => 'Front'), function()
+Route::group(array(
+    'domain' => '{lang}.blog.com',
+    'before' => 'localization'), function()
 {
-    Route::get('/angular/', ['uses' => 'AngularController@serve']);
-    // Start-main page on SPA
-    Route::get('/', function()
+    Route::group(array('namespace' => 'Front'), function()
     {
-        return View::make('front.facade');
-    });
-    //RESTful Resource Controllers
-    Route::resource('article', 'ArticleController');
-    Route::resource('project', 'ProjectController');
-    Route::resource('comment', 'CommentController');
-});
+        Route::get('/angular/', ['uses' => 'AngularController@serve']);
 
-Route::group(array('namespace' => 'Admin',
-    'prefix' => 'adm'), function()
-{
-    Route::group(array('before' => 'authAdmin'), function(){
         // Start-main page on SPA
-        Route::get('dashboard', function()
+        Route::get('/', function()
         {
             return View::make('front.facade');
         });
+
+        //RESTful Resource Controllers
+        Route::resource('article', 'ArticleController');
+        Route::resource('project', 'ProjectController');
+        Route::resource('comment', 'CommentController');
     });
 
-    Route::resource('auth', 'AuthController');
+    Route::group(array('namespace' => 'Admin',
+        'prefix' => 'adm'), function()
+    {
+        Route::group(array('before' => 'auth.admin'), function(){
+            // Start-main page on SPA
+            Route::get('dashboard', function()
+            {
+                return View::make('front.facade');
+            });
+
+            Route::get('logout', function() {
+                Auth::admin()->logout();
+            });
+        });
+
+        Route::resource('auth', 'AuthController');
+    });
+});
+
+Route::group(array('domain' => 'blog.com'), function()
+{
+    Route::any('{url?}', function($url) {
+        $redirectUrl = 'http://' . Config::get('app.locale'). '.' . 'blog.com/' . $url;
+        return Redirect::to($redirectUrl);
+    })->where(['url' => '[-a-z0-9/]+']);
+
 });

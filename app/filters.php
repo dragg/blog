@@ -51,6 +51,13 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+
+Route::filter('auth.admin', function()
+{
+    if(!Auth::admin()->check()) {
+        return View::make('admin.signin');
+    }
+});
 /*
 |--------------------------------------------------------------------------
 | Guest Filter
@@ -84,4 +91,10 @@ Route::filter('csrf', function()
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
+});
+
+
+Route::filter('localization', function()
+{
+    App::setLocale(Route::input('lang'));
 });
