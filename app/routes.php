@@ -25,7 +25,7 @@ Route::group(array(
         // Start-main page on SPA
         Route::get('/', function()
         {
-            return View::make('front.facade');
+            return View::make('front\facade');
         });
 
         //RESTful Resource Controllers
