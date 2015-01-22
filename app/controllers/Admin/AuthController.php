@@ -35,14 +35,16 @@ class AuthController extends \BaseController {
 	 */
 	public function store()
 	{
-        $response = 0;
+        $response = [0, ""];
 
         $login = Input::get('login');
         $password = Input::get('password');
         $remember_me = (Input::get('remember') === 1) ? true: false;
 
         if (Auth::admin()->attempt(array('login' => $login, 'password' => $password), $remember_me)) {
-            $response = 1;
+            $response = [1, trans('admin/sign_in.message_login_success')];
+        } else {
+            $response[1] = trans('admin/sign_in.message_login_wrong');
         }
 
         return Response::json($response);

@@ -21,4 +21,8 @@ return array(
 
     "login"                                     => "Login",
     "password"                                  => "Password",
+
+    "message_login_wrong"                       => "Incorrect login or password",
+    "message_login_success"                     => "Success login",
+
 );

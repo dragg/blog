@@ -21,4 +21,7 @@ return array(
 
     "login"                                     => "Логин",
     "password"                                  => "Пароль",
+
+    "message_login_wrong"                       => "Неверный логин или пароль",
+    "message_login_success"                     => "Вход успешно выполнен",
 );

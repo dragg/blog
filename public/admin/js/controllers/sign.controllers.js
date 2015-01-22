@@ -23,15 +23,18 @@ function SignCtrl($window, Sign) {
         if(isValid) {
             var success = function(res) {
                 console.log(res);
-                if(res === 1){
+                if(res[0] === 1){
+                    vm.alert = { msg: res[1], type: 'success'};
                     window.location.reload();
                 } else {
-                    vm.alert = { msg: 'Incorrect login or password!', type: 'danger'};
+                    vm.alert = { msg: res[1], type: 'danger'};
                 }
+
             };
 
             var error = function(res) {
-                vm.alert = { msg: 'Sorry! We don\'t know that happened :(', type: 'info'};
+                console.log(res);
+                //vm.alert = { msg: 'Sorry! We don\'t know that happened :(', type: 'info'};
             };
 
             Sign.signIn(vm.user)

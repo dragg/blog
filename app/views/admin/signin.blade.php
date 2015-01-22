@@ -57,7 +57,7 @@
             <input type="password" class="form-control" placeholder="<% trans('admin/sign_in.placeholder_password') %>"
                    name="password" required
                    data-ng-model="vm.user.password" data-minlength="4" data-maxlength="32" data-ng-required="true"
-                   data-ng-change="closeAlert()">
+                   data-ng-change="vm.closeAlert()">
             <span class="help-block" data-ng-show="(signForm.password.$error.required) && vm.submitted">
                 <% trans('admin/sign_in.help_block_empty', ['Some' => $password]) %>
             </span>
